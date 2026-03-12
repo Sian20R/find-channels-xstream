@@ -14,7 +14,7 @@ XSTREAM_SERVER = os.getenv("XSTREAM_SERVER")
 XSTREAM_USERNAME = os.getenv("XSTREAM_USERNAME")
 XSTREAM_PASSWORD = os.getenv("XSTREAM_PASSWORD")
 BASE = f"{XSTREAM_SERVER}/player_api.php?username={XSTREAM_USERNAME}&password={XSTREAM_PASSWORD}"
-DB_FILE = "xstream.db"
+DB_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "xstream.db")
 REFRESH_DAYS = int(os.getenv("REFRESH_DAYS", "7"))
 THREADS = int(os.getenv("THREADS", "100"))  # adjust based on your connection speed
 
