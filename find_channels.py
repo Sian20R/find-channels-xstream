@@ -1,32 +1,3 @@
-"""
-============================================================
- 📡 Xstream EPG Channel Finder
-============================================================
-
-HOW IT WORKS:
-  First Run        → Fetches ALL data from API → Stores in xstream.db
-  Subsequent Runs  → Reads from SQLite only (no API calls)
-  Every 7 Days     → Auto-refreshes from API
-  Force Refresh    → Type 'y' when prompted
-
-FLOW DIAGRAM:
-
-  Start
-    │
-    ├─ DB empty or >7 days old? ──YES──► Fetch API ──► Store in SQLite
-    │                                                        │
-    └─ NO (use cached data) ◄───────────────────────────────┘
-           │
-           ▼
-      Search SQLite locally (fast, no API calls)
-
-API CALLS ONLY HAPPEN WHEN:
-  1. First time ever (empty DB)
-  2. Every 7 days (stale data)
-
-============================================================
-"""
-
 import requests
 import sqlite3
 import os
