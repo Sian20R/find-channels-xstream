@@ -59,9 +59,9 @@ nano .env
 
 Fill in your credentials:
 ```
-SERVER=http://your-iptv-server.com
-USERNAME=your_username
-PASSWORD=your_password
+XSTREAM_SERVER=http://your-iptv-server.com
+XSTREAM_USERNAME=your_username
+XSTREAM_PASSWORD=your_password
 REFRESH_DAYS=7
 THREADS=100
 ```

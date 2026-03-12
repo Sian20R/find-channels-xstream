@@ -10,15 +10,16 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # --- CONFIG ---
-SERVER = os.getenv("SERVER")
-USERNAME = os.getenv("USERNAME")
-PASSWORD = os.getenv("PASSWORD")
-BASE = f"{SERVER}/player_api.php?username={USERNAME}&password={PASSWORD}"
+XSTREAM_SERVER = os.getenv("XSTREAM_SERVER")
+XSTREAM_USERNAME = os.getenv("XSTREAM_USERNAME")
+XSTREAM_PASSWORD = os.getenv("XSTREAM_PASSWORD")
+BASE = f"{XSTREAM_SERVER}/player_api.php?username={XSTREAM_USERNAME}&password={XSTREAM_PASSWORD}"
 DB_FILE = "xstream.db"
 REFRESH_DAYS = int(os.getenv("REFRESH_DAYS", "7"))
 THREADS = int(os.getenv("THREADS", "100"))  # adjust based on your connection speed
 
-if not all([SERVER, USERNAME, PASSWORD]):
+
+if not all([XSTREAM_SERVER, XSTREAM_USERNAME, XSTREAM_PASSWORD]):
     raise ValueError("SERVER, USERNAME, and PASSWORD must be set in .env")
 
 SGT = timezone(timedelta(hours=8))
@@ -137,9 +138,11 @@ def fetch_and_store():
     c.execute("DELETE FROM epg")
     conn.commit()
 
+    
+
     # 1. Fetch & store categories
     print("   📂 Fetching categories...")
-    r = requests.get(f"{BASE}&action=get_live_categories", timeout=10)
+    r = requests.get(f"{BASE}&action=get_live_categories", timeout=10)# first 500 chars
     categories = r.json()
     c.executemany(
         "INSERT OR REPLACE INTO categories (category_id, category_name) VALUES (?, ?)",
